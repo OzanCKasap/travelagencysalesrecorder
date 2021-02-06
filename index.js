@@ -36,10 +36,10 @@ Tourist = class {
     thank(agent) {
         console.log("Alright, thank you " + agent.name + "! Have a nice day.")
     }
-    // bookings(destinations) {
-    //     this.destinations = destinations
-    //     destinations = []
-    // }
+    bookings(destinations) {
+        this.destinations = destinations
+        destinations = []
+    }
 };
 
 printName = tourist => console.log(tourist.name);
