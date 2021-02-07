@@ -6,7 +6,7 @@ Agent = class {
         console.log("Greetings " + tourist.name + "! My name is " + this.name + ".")
     }
     sell(tourist) {
-        console.log("Dear " + tourist.name + ", I booked you a flight to " + tourist.destination.name + "!")
+        console.log("Dear " + tourist.name + ", I booked you a flight to your desired destination. Have a good one!")
     }
 };
 
@@ -16,6 +16,7 @@ Destination = class {
         this.travellers = []
     }
     travellersList() {
+        console.log("The following tourist(s) is/are travelling to " + this.name + ":")
         this.travellers.forEach(printName)
     }
 };
@@ -24,25 +25,19 @@ Tourist = class {
     constructor(name) {
         console.log("Hi, my name is", name + ".")
         this.name = name
+        this.destinations = []
     }
-    travel(destination) {
-        this.destination = destination
+    travel(agent, destination) {
+        this.destinations.push(destination)
         destination.travellers.push(this)
-        console.log("I would like to go to " + destination.name + "!")
-    }
-    ask(agent) {
-        console.log("Dear", agent.name + ", can you help me?")
+        console.log("Dear", agent.name + ", can you help me? I would like to go to " + destination.name + "!")
     }
     thank(agent) {
         console.log("Alright, thank you " + agent.name + "! Have a nice day.")
     }
-    // bookings(destinations) {
-    //     this.destinations = destinations
-    //     destinations = []
-    // }
 };
 
-printName = tourist => console.log(tourist.name);
+printName = tourist => console.log(tourist.name)
 
 paris = new Destination('Paris');
 berlin = new Destination('Berlin');
@@ -52,28 +47,28 @@ hasan = new Agent('Hasan');
 
 ozan = new Tourist('Ozan');
 hasan.greet(ozan);
-ozan.ask(hasan);
-ozan.travel(paris);
+ozan.travel(hasan, paris);
 hasan.sell(ozan);
 ozan.thank(hasan);
 
 aydın = new Tourist('Aydın');
 hasan.greet(aydın);
-aydın.ask(hasan);
-aydın.travel(berlin);
+aydın.travel(hasan, berlin);
 hasan.sell(aydın);
 aydın.thank(hasan);
 
 alper = new Tourist('Alper');
 hasan.greet(alper);
-alper.ask(hasan);
-alper.travel(newYorkCity);
+alper.travel(hasan, newYorkCity);
 hasan.sell(alper);
 alper.thank(hasan);
 
 alphan = new Tourist('Alphan');
 hasan.greet(alphan);
-alphan.ask(hasan);
-alphan.travel(newYorkCity);
+alphan.travel(hasan, newYorkCity);
 hasan.sell(alphan);
 alphan.thank(hasan);
+
+paris.travellersList();
+berlin.travellersList();
+newYorkCity.travellersList();
