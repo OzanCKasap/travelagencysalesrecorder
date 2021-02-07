@@ -52,10 +52,10 @@ console.log(Chalk.bgBlue.bold("The list of all travellers going to Paris was sav
 berlin.travellersList();
 Database.save('savedListBerlin.json', berlin);
 const savedListBerlin = Database.load('savedListBerlin.json');
-console.log(Chalk.bgBlue.bold("The list of all travellers going to Paris was saved in: savedList" + savedListBerlin.name + ".json"));
+console.log(Chalk.bgBlue.bold("The list of all travellers going to Berlin was saved in: savedList" + savedListBerlin.name + ".json"));
 
 
 newYorkCity.travellersList();
 Database.save('savedListNYC.json', newYorkCity);
 const savedListNYC = Database.load('savedListNYC.json');
-console.log(Chalk.bgBlue.bold("The list of all travellers going to Paris was saved in: savedList" + savedListNYC.name + ".json"));
+console.log(Chalk.bgBlue.bold("The list of all travellers going to New York City was saved in: savedList" + savedListNYC.name + ".json"));
