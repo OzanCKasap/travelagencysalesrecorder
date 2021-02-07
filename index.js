@@ -1,49 +1,22 @@
-Agent = class {
-    constructor(name) {
-        this.name = name
-    }
-    greet(tourist) {
-        console.log("Greetings " + tourist.name + "! My name is " + this.name + ".")
-    }
-    sell(tourist) {
-        console.log("Dear " + tourist.name + ", I booked you a flight to your desired destination. Have a good one!")
-    }
-};
+const Tourist = require('./Tourist');
+const Destination = require('./Destination');
+const Agent = require('./Agent');
+const Database = require('./database');
+const Chalk = require('chalk');
 
-Destination = class {
-    constructor(name) {
-        this.name = name
-        this.travellers = []
-    }
-    travellersList() {
-        console.log("The following tourist(s) is/are travelling to " + this.name + ":")
-        this.travellers.forEach(printName)
-    }
-};
+printName = tourist => console.log(tourist.name);
 
-Tourist = class {
-    constructor(name) {
-        console.log("Hi, my name is", name + ".")
-        this.name = name
-        this.destinations = []
-    }
-    travel(agent, destination) {
-        this.destinations.push(destination)
-        destination.travellers.push(this)
-        console.log("Dear", agent.name + ", can you help me? I would like to go to " + destination.name + "!")
-    }
-    thank(agent) {
-        console.log("Alright, thank you " + agent.name + "! Have a nice day.")
-    }
-};
-
-printName = tourist => console.log(tourist.name)
+//Tours in sales: 
 
 paris = new Destination('Paris');
 berlin = new Destination('Berlin');
-newYorkCity = new Destination('New York City');
+newYorkCity = new Destination('NYC');
+
+//Travel consultant in charge: 
 
 hasan = new Agent('Hasan');
+
+//Customer interactions: 
 
 ozan = new Tourist('Ozan');
 hasan.greet(ozan);
@@ -69,6 +42,20 @@ alphan.travel(hasan, newYorkCity);
 hasan.sell(alphan);
 alphan.thank(hasan);
 
+//Booking record: 
+
 paris.travellersList();
+Database.save('savedListParis.json', paris);
+const savedListParis = Database.load('savedListParis.json');
+console.log(Chalk.bgBlue.bold("The list of all travellers going to Paris was saved in: savedList" + savedListParis.name + ".json"));
+
 berlin.travellersList();
+Database.save('savedListBerlin.json', berlin);
+const savedListBerlin = Database.load('savedListBerlin.json');
+console.log(Chalk.bgBlue.bold("The list of all travellers going to Paris was saved in: savedList" + savedListBerlin.name + ".json"));
+
+
 newYorkCity.travellersList();
+Database.save('savedListNYC.json', newYorkCity);
+const savedListNYC = Database.load('savedListNYC.json');
+console.log(Chalk.bgBlue.bold("The list of all travellers going to Paris was saved in: savedList" + savedListNYC.name + ".json"));
